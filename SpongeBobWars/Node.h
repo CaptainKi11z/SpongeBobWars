@@ -11,7 +11,6 @@
 class Node
 {
 public:
-    //Player * owner;
     int type;
     
     //Neighboring Node ptrs
@@ -28,7 +27,6 @@ public:
     void assignNeighbors(Node *top, Node *topRight, Node *bottomRight, Node *bottom, Node *bottomLeft, Node *topLeft);
     
     void tick(); //Do whatever needs to be done on the passing of a turn
-    void attackNode(Node * defendingNode);
 };
 
 #endif

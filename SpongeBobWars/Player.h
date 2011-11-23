@@ -18,7 +18,6 @@ public:
     Fleet * fleet;
     Node ** myNodes;
     int nodesOwned;
-    //std::string * name;
     
     bool iOwnNode(Node *node);
     

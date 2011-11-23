@@ -50,7 +50,8 @@ void initGame(int numPlayers, int numNodes)
     }
     
     //Create map out of Nodes
-    
+    //NEED TO DO
+    //I have an idea of how to do this- so I'll take care of it later.
 }
 
 
