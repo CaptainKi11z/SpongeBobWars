@@ -1,0 +1,242 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4A0ACDC1147D6261007D3F9E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ACDC0147D6261007D3F9E /* main.cpp */; };
+		4A0ACDCA147D627D007D3F9E /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ACDC8147D627D007D3F9E /* Player.cpp */; };
+		4A0ACDCD147D628F007D3F9E /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ACDCB147D628F007D3F9E /* Model.cpp */; };
+		4A0ACDD0147D62A4007D3F9E /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ACDCE147D62A4007D3F9E /* Node.cpp */; };
+		4A0ACDD3147D62B0007D3F9E /* Unit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ACDD1147D62B0007D3F9E /* Unit.cpp */; };
+		4A0ACE07147D7061007D3F9E /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ACE05147D7061007D3F9E /* Ship.cpp */; };
+		4A0ACE0A147D709D007D3F9E /* Flagship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ACE08147D709D007D3F9E /* Flagship.cpp */; };
+		4A0ACE0D147D7128007D3F9E /* Fleet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ACE0B147D7128007D3F9E /* Fleet.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4A0ACDBA147D6261007D3F9E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4A0ACDBC147D6261007D3F9E /* SpongeBobWars */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SpongeBobWars; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A0ACDC0147D6261007D3F9E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		4A0ACDC8147D627D007D3F9E /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		4A0ACDC9147D627D007D3F9E /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		4A0ACDCB147D628F007D3F9E /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
+		4A0ACDCC147D628F007D3F9E /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		4A0ACDCE147D62A4007D3F9E /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
+		4A0ACDCF147D62A4007D3F9E /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		4A0ACDD1147D62B0007D3F9E /* Unit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Unit.cpp; sourceTree = "<group>"; };
+		4A0ACDD2147D62B0007D3F9E /* Unit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unit.h; sourceTree = "<group>"; };
+		4A0ACE05147D7061007D3F9E /* Ship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ship.cpp; sourceTree = "<group>"; };
+		4A0ACE06147D7061007D3F9E /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
+		4A0ACE08147D709D007D3F9E /* Flagship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flagship.cpp; sourceTree = "<group>"; };
+		4A0ACE09147D709D007D3F9E /* Flagship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flagship.h; sourceTree = "<group>"; };
+		4A0ACE0B147D7128007D3F9E /* Fleet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fleet.cpp; sourceTree = "<group>"; };
+		4A0ACE0C147D7128007D3F9E /* Fleet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fleet.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4A0ACDB9147D6261007D3F9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4A0ACDB1147D6261007D3F9E = {
+			isa = PBXGroup;
+			children = (
+				4A0ACDBF147D6261007D3F9E /* SpongeBobWars */,
+				4A0ACDBD147D6261007D3F9E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4A0ACDBD147D6261007D3F9E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4A0ACDBC147D6261007D3F9E /* SpongeBobWars */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4A0ACDBF147D6261007D3F9E /* SpongeBobWars */ = {
+			isa = PBXGroup;
+			children = (
+				4A0ACDC0147D6261007D3F9E /* main.cpp */,
+				4A0ACDCC147D628F007D3F9E /* Model.h */,
+				4A0ACDCB147D628F007D3F9E /* Model.cpp */,
+				4A0ACDC9147D627D007D3F9E /* Player.h */,
+				4A0ACDC8147D627D007D3F9E /* Player.cpp */,
+				4A0ACDCF147D62A4007D3F9E /* Node.h */,
+				4A0ACDCE147D62A4007D3F9E /* Node.cpp */,
+				4A0ACDD2147D62B0007D3F9E /* Unit.h */,
+				4A0ACDD1147D62B0007D3F9E /* Unit.cpp */,
+				4A0ACE06147D7061007D3F9E /* Ship.h */,
+				4A0ACE05147D7061007D3F9E /* Ship.cpp */,
+				4A0ACE09147D709D007D3F9E /* Flagship.h */,
+				4A0ACE08147D709D007D3F9E /* Flagship.cpp */,
+				4A0ACE0C147D7128007D3F9E /* Fleet.h */,
+				4A0ACE0B147D7128007D3F9E /* Fleet.cpp */,
+			);
+			path = SpongeBobWars;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4A0ACDBB147D6261007D3F9E /* SpongeBobWars */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A0ACDC5147D6261007D3F9E /* Build configuration list for PBXNativeTarget "SpongeBobWars" */;
+			buildPhases = (
+				4A0ACDB8147D6261007D3F9E /* Sources */,
+				4A0ACDB9147D6261007D3F9E /* Frameworks */,
+				4A0ACDBA147D6261007D3F9E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SpongeBobWars;
+			productName = SpongeBobWars;
+			productReference = 4A0ACDBC147D6261007D3F9E /* SpongeBobWars */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4A0ACDB3147D6261007D3F9E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "UW Madison";
+			};
+			buildConfigurationList = 4A0ACDB6147D6261007D3F9E /* Build configuration list for PBXProject "SpongeBobWars" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4A0ACDB1147D6261007D3F9E;
+			productRefGroup = 4A0ACDBD147D6261007D3F9E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4A0ACDBB147D6261007D3F9E /* SpongeBobWars */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4A0ACDB8147D6261007D3F9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A0ACDC1147D6261007D3F9E /* main.cpp in Sources */,
+				4A0ACDCA147D627D007D3F9E /* Player.cpp in Sources */,
+				4A0ACDCD147D628F007D3F9E /* Model.cpp in Sources */,
+				4A0ACDD0147D62A4007D3F9E /* Node.cpp in Sources */,
+				4A0ACDD3147D62B0007D3F9E /* Unit.cpp in Sources */,
+				4A0ACE07147D7061007D3F9E /* Ship.cpp in Sources */,
+				4A0ACE0A147D709D007D3F9E /* Flagship.cpp in Sources */,
+				4A0ACE0D147D7128007D3F9E /* Fleet.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4A0ACDC3147D6261007D3F9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4A0ACDC4147D6261007D3F9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4A0ACDC6147D6261007D3F9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4A0ACDC7147D6261007D3F9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4A0ACDB6147D6261007D3F9E /* Build configuration list for PBXProject "SpongeBobWars" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A0ACDC3147D6261007D3F9E /* Debug */,
+				4A0ACDC4147D6261007D3F9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A0ACDC5147D6261007D3F9E /* Build configuration list for PBXNativeTarget "SpongeBobWars" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A0ACDC6147D6261007D3F9E /* Debug */,
+				4A0ACDC7147D6261007D3F9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4A0ACDB3147D6261007D3F9E /* Project object */;
+}
