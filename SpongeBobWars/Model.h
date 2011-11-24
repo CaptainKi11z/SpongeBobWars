@@ -12,6 +12,9 @@
  * CONSTANTS
  */
 
+#define MAP_DENSITY 3 //1(linear) to 6(full mesh)
+#define NULL_LOCATION 99999 //'unattainable' row/column to be used for non-placed nodes
+
 //Node/Unit Types
 #define NUM_TYPES  4
 #define TYPE_WATER 0

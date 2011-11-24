@@ -13,8 +13,87 @@
 
 int numPlayers = 5;
 int numNodes = 10;
+
 Player ** playerArray;
 Node ** nodeArray;
+
+void createNodeMap(Node * centerNode, int numNodes)
+{
+    Node* sourceNode;
+    Node* newNeighbor;
+    int nodesLeftToBeAssigned = numNodes;
+    int rNode;
+    int rNeighbor;
+    
+    Node** copyArray = new Node*[numNodes];
+    for(int i = 0; i < numNodes; i++)
+    {
+        copyArray[i] = nodeArray[i];
+    }
+    
+    centerNode->row = 0;
+    centerNode->column = 0;
+    sourceNode = centerNode;
+    
+    bool nodeAssigned = false;
+    while(nodesLeftToBeAssigned > 0)
+    {
+        rNode = (int)Model::random()*nodesLeftToBeAssigned;
+        newNeighbor = copyArray[rNode];
+        nodeAssigned = false;
+        while(!nodeAssigned)
+        {
+            if(sourceNode->numNeighborNodes < MAP_DENSITY && ((rNeighbor = newNeighbor->getRandomFreeNeighbor()) != -1))
+            {
+                sourceNode->neighborNodes[rNeighbor] = newNeighbor;
+                newNeighbor->neighborNodes[(rNeighbor+3)%6] = sourceNode;
+                sourceNode->numNeighborNodes++;
+                newNeighbor->numNeighborNodes++;
+                switch (rNeighbor) {
+                    case 0:
+                        newNeighbor->row = sourceNode->row+1;
+                        newNeighbor->column = sourceNode->column;
+                        break;
+                    case 1:
+                        newNeighbor->row = sourceNode->row+1;
+                        newNeighbor->column = sourceNode->column+1;
+                        break;
+                    case 2:
+                        newNeighbor->row = sourceNode->row-1;
+                        newNeighbor->column = sourceNode->column+1;
+                        break;
+                    case 3:
+                        newNeighbor->row = sourceNode->row-1;
+                        newNeighbor->column = sourceNode->column;
+                        break;
+                    case 4:
+                        newNeighbor->row = sourceNode->row-1;
+                        newNeighbor->column = sourceNode->column-1;
+                        break;
+                    case 5:
+                        newNeighbor->row = sourceNode->row+1;
+                        newNeighbor->column = sourceNode->column-1;
+                        break;
+                    default:
+                        throw new std::string("PICKED NEIGHBOR OUTSIDE BOUNDS");
+                        break;
+                }
+                for(int i = rNode; i < nodesLeftToBeAssigned-1; i++)
+                {
+                    copyArray[i] = copyArray[i+1];
+                }
+                nodesLeftToBeAssigned--;
+                nodeAssigned = true;
+            }
+            else
+            {
+                sourceNode = sourceNode->neighborNodes[sourceNode->getRandomNeighbor()];
+            }
+        }
+    }
+    
+    delete copyArray;
+}
 
 void initGame(int numPlayers, int numNodes)
 {    
@@ -50,8 +129,7 @@ void initGame(int numPlayers, int numNodes)
     }
     
     //Create map out of Nodes
-    //NEED TO DO
-    //I have an idea of how to do this- so I'll take care of it later.
+    createNodeMap(centerNode, numNodes);
 }
 
 
