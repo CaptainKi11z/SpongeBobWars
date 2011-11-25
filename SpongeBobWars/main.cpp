@@ -17,18 +17,76 @@ int numNodes = 10;
 Player ** playerArray;
 Node ** nodeArray;
 
+void linkNodeToNeighbors(Node * node)
+{
+    int col;
+    int row;
+    for(int i = 0; i < 6; i++)
+    {
+        switch (i) {
+            case 0:
+                col = node->column;
+                row = node->row+2;
+                break;
+            case 1:
+                col = node->column+1;
+                row = node->row+1;
+                break;
+            case 2:
+                col = node->column+1;
+                row = node->row-1;
+                break;
+            case 3:
+                col = node->column;
+                row = node->row-2;
+                break;
+            case 4:
+                col = node->column-1;
+                row = node->row-1;
+                break;
+            case 5:
+                col = node->column-1;
+                row = node->row+1;
+                break;
+            default:
+                throw new std::string("PICKED NEIGHBOR OUTSIDE BOUNDS");
+                break;
+        }
+
+        for(int j = 0; j < Model::getSelf()->numNodes; j++)
+        {
+            if(nodeArray[j]->column == col && nodeArray[j]->row == row)
+            {
+                node->neighborNodes[i] = nodeArray[j];
+                nodeArray[j]->neighborNodes[(i+3)%6] = node;
+                node->numNeighborNodes++;
+                nodeArray[j]->numNeighborNodes++;
+            }
+        }
+    }
+}
+
 void createNodeMap(Node * centerNode, int numNodes)
 {
+    //THIS FUNCTION IS IN-COMPLETE:
+    // it gets stuck looking for a source node that is eligible for a neighbor. 
+    // Needs to be tweaked to allow it to break MAP_DENSITY rule if necessary.
+    
+    
+    //NOTE: Two important nodes in this algorithm- sourceNode and newNeighbor. 
+    //  sourceNode is the node currently looking to add a neighbor (and should already be assigned a location). 
+    //  newNeighbor is the node that is looking to be placed, and will be placed next to sourceNode.
     Node* sourceNode;
     Node* newNeighbor;
     int nodesLeftToBeAssigned = numNodes;
     int rNode;
     int rNeighbor;
     
+    //Holds all nodes yet to be assigned. Node gets removed as it is assigned a location
     Node** copyArray = new Node*[numNodes];
     for(int i = 0; i < numNodes; i++)
     {
-        copyArray[i] = nodeArray[i];
+            copyArray[i] = nodeArray[i];
     }
     
     centerNode->row = 0;
@@ -36,22 +94,30 @@ void createNodeMap(Node * centerNode, int numNodes)
     sourceNode = centerNode;
     
     bool nodeAssigned = false;
+    //Assign each node a location
     while(nodesLeftToBeAssigned > 0)
     {
+        //Pick a random node from copyArray
         rNode = (int)Model::random()*nodesLeftToBeAssigned;
         newNeighbor = copyArray[rNode];
         nodeAssigned = false;
+        
+        //Algorithm ensures node is assigned
         while(!nodeAssigned)
         {
+            //If the current source node is eligible to have a neighbor
             if(sourceNode->numNeighborNodes < MAP_DENSITY && ((rNeighbor = newNeighbor->getRandomFreeNeighbor()) != -1))
             {
+                //Link source and neighbor nodes
                 sourceNode->neighborNodes[rNeighbor] = newNeighbor;
                 newNeighbor->neighborNodes[(rNeighbor+3)%6] = sourceNode;
                 sourceNode->numNeighborNodes++;
                 newNeighbor->numNeighborNodes++;
+                
+                //Assign the new node a location coordinate
                 switch (rNeighbor) {
                     case 0:
-                        newNeighbor->row = sourceNode->row+1;
+                        newNeighbor->row = sourceNode->row+2;
                         newNeighbor->column = sourceNode->column;
                         break;
                     case 1:
@@ -63,7 +129,7 @@ void createNodeMap(Node * centerNode, int numNodes)
                         newNeighbor->column = sourceNode->column+1;
                         break;
                     case 3:
-                        newNeighbor->row = sourceNode->row-1;
+                        newNeighbor->row = sourceNode->row-2;
                         newNeighbor->column = sourceNode->column;
                         break;
                     case 4:
@@ -78,13 +144,20 @@ void createNodeMap(Node * centerNode, int numNodes)
                         throw new std::string("PICKED NEIGHBOR OUTSIDE BOUNDS");
                         break;
                 }
+                
+                //Link new node to all other neighbors based on coordinate
+                linkNodeToNeighbors(newNeighbor);
+                
+                //Remove node from copyArray
                 for(int i = rNode; i < nodesLeftToBeAssigned-1; i++)
                 {
                     copyArray[i] = copyArray[i+1];
                 }
                 nodesLeftToBeAssigned--;
+                
                 nodeAssigned = true;
             }
+            //Otherwise assign a current neighbor of the source node as the new source node
             else
             {
                 sourceNode = sourceNode->neighborNodes[sourceNode->getRandomNeighbor()];
