@@ -83,22 +83,25 @@ void createNodeMap(Node * centerNode, int numNodes)
     int rNeighbor;
     
     //Holds all nodes yet to be assigned. Node gets removed as it is assigned a location
+    //Starts with all nodes but 'centerNode', as it is by definition already assigned
     Node** copyArray = new Node*[numNodes];
-    for(int i = 0; i < numNodes; i++)
+    for(int i = 0; i < numNodes-1; i++)
     {
-            copyArray[i] = nodeArray[i];
+        if(i < Model::getSelf()->numPlayers) copyArray[i] = nodeArray[i];
+        else copyArray[i] = nodeArray[i+1];
     }
+    nodesLeftToBeAssigned--;
     
     centerNode->row = 0;
     centerNode->column = 0;
     sourceNode = centerNode;
-    
+
     bool nodeAssigned = false;
     //Assign each node a location
     while(nodesLeftToBeAssigned > 0)
     {
         //Pick a random node from copyArray
-        rNode = (int)Model::random()*nodesLeftToBeAssigned;
+        rNode = (int)(Model::random()*nodesLeftToBeAssigned);
         newNeighbor = copyArray[rNode];
         nodeAssigned = false;
         
@@ -106,14 +109,8 @@ void createNodeMap(Node * centerNode, int numNodes)
         while(!nodeAssigned)
         {
             //If the current source node is eligible to have a neighbor
-            if(sourceNode->numNeighborNodes < MAP_DENSITY && ((rNeighbor = newNeighbor->getRandomFreeNeighbor()) != -1))
+            if(sourceNode->numNeighborNodes < MAP_DENSITY && ((rNeighbor = sourceNode->getRandomFreeNeighbor()) != -1))
             {
-                //Link source and neighbor nodes
-                sourceNode->neighborNodes[rNeighbor] = newNeighbor;
-                newNeighbor->neighborNodes[(rNeighbor+3)%6] = sourceNode;
-                sourceNode->numNeighborNodes++;
-                newNeighbor->numNeighborNodes++;
-                
                 //Assign the new node a location coordinate
                 switch (rNeighbor) {
                     case 0:
@@ -145,6 +142,10 @@ void createNodeMap(Node * centerNode, int numNodes)
                         break;
                 }
                 
+                //Uncomment for debugging info
+                //std::cout << "SourceNode: " << sourceNode->column << "," << sourceNode->row << std::endl;
+                //std::cout << "NeighborNode: " << newNeighbor->column << "," << newNeighbor->row << "\n" << std::endl;
+
                 //Link new node to all other neighbors based on coordinate
                 linkNodeToNeighbors(newNeighbor);
                 

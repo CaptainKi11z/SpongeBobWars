@@ -37,7 +37,7 @@ Node::~Node()
 
 int Node::getRandomFreeNeighbor()
 {
-    int r = (int)Model::random()*6;
+    int r = (int)(Model::random()*6);
     for(int i = 0; i < 6; i++)
     {
         if(this->neighborNodes[(r+i)%6] == Model::getSelf()->nullNode)
@@ -48,7 +48,7 @@ int Node::getRandomFreeNeighbor()
 
 int Node::getRandomNeighbor()
 {
-    int r = (int)Model::random()*6;
+    int r = (int)(Model::random()*6);
     for(int i = 0; i < 6; i++)
     {
         if(this->neighborNodes[(r+i)%6] != Model::getSelf()->nullNode)
