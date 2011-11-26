@@ -300,7 +300,7 @@ void initGL(int argc, char * argv[])
     glShadeModel(GL_FLAT);
     
     //Aim Stationary Light
-    GLfloat pos[4] = {0.0f, 10000.0f, 0.0f, 1.0f};
+    GLfloat pos[4] = {0.0f, 10.0f, 0.0f, 1.0f};
     glLightfv(GL_LIGHT0, GL_POSITION, pos);
 	
     //Callback Functions

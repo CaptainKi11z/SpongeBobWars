@@ -96,7 +96,6 @@ void Node::compileDL()
     glVertex3d(-1/2, layer, -1*sqrtOfThreeOverTwo);
     glVertex3d(1/2, layer, -1*sqrtOfThreeOverTwo);    
     glEnd();
-    gluSphere(gluNewQuadric(),50,50,50);
     glEndList();
     compiled = true;
 }
