@@ -10,11 +10,13 @@
 #import <GLUT/GLUT.h>
 #include <iostream.h>
 #include <stdlib.h>
+#include <math.h>
+
 
 #include "Model.h"
 
 int numPlayers = 5;
-int numNodes = 30;
+int numNodes = 500;
 
 Player ** playerArray;
 Node ** nodeArray;
@@ -85,6 +87,11 @@ void createNodeMap(Node * centerNode, int numNodes)
     int rNeighbor;
     int numAssignAttempts;
     bool sourceEligible;
+    
+    int rowMin = 0;
+    int rowMax = 0;
+    int colMin = 0;
+    int colMax = 0;
     
     //Holds all nodes yet to be assigned. Node gets removed as it is assigned a location
     //Starts with all nodes but 'centerNode', as it is by definition already assigned
@@ -167,6 +174,15 @@ void createNodeMap(Node * centerNode, int numNodes)
                 }
                 nodesLeftToBeAssigned--;
                 
+                if(newNeighbor->row < rowMin)
+                    rowMin = newNeighbor->row;
+                if(newNeighbor->row > rowMax)
+                    rowMax = newNeighbor->row;
+                if(newNeighbor->column < colMin)
+                    colMin = newNeighbor->column;
+                if(newNeighbor->row > colMax)
+                    colMax = newNeighbor->column;
+                
                 nodeAssigned = true;
             }
             //Otherwise assign a current neighbor of the source node as the new source node
@@ -177,6 +193,11 @@ void createNodeMap(Node * centerNode, int numNodes)
             }
         }
     }
+    Model::getSelf()->rowMin = rowMin;
+    Model::getSelf()->rowMax = rowMax;
+    Model::getSelf()->colMin = colMin;
+    Model::getSelf()->colMax = colMax;
+    Model::getSelf()->setCameraParams();
     
     delete copyArray;
 }
@@ -249,7 +270,7 @@ void drawMap()
     
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-    gluLookAt(Model::getSelf()->mouseX*10, 20, Model::getSelf()->mouseY*-10, 0, 0, 0, 0, 0, -1); 
+    gluLookAt(Model::getSelf()->camCenterX+Model::getSelf()->mouseX*10, Model::getSelf()->zoom, Model::getSelf()->camCenterY+Model::getSelf()->mouseY*-10, Model::getSelf()->camCenterX, 0, Model::getSelf()->camCenterY, 0, 0, -1); 
     
     for(int i = 0; i < Model::getSelf()->numNodes; i++)
     {

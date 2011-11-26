@@ -78,6 +78,14 @@ public:
     
     int numPlayers;
     int numNodes;
+    int rowMax;
+    int rowMin;
+    int colMax;
+    int colMin;
+    double zoom;
+    double camCenterX;
+    double camCenterY;
+    void setCameraParams();
     
     void setNumPlayers(int numPlayers);
     void setNumNodes(int numNodes);

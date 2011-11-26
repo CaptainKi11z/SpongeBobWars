@@ -7,6 +7,7 @@
 //
 #include <iostream>
 #include <string>
+#include <math.h>
 
 #include "Model.h"
 
@@ -23,6 +24,11 @@ Model::Model()
     this->nullNode = NULL;
     this->nullPlayer = NULL;
     this->nullUnit = NULL;
+    
+    this->rowMax = 0;
+    this->rowMin = 0;
+    this->colMax = 0;
+    this->colMin = 0;
     
     //HELPER STUFF
     srand(0);
@@ -52,6 +58,13 @@ void Model::setNumNodes(int numNodes)
 {
     Model::getSelf()->numNodes = numNodes;
     Model::getSelf()->nodeArray = new Node*[numNodes];
+}
+
+void Model::setCameraParams()
+{
+    Model::getSelf()->zoom = 5*sqrt(fmax(rowMax-rowMin, colMax-colMin)*2);
+    camCenterX = (colMax + colMin)/2.0;
+    camCenterY = (rowMax + rowMin)/2.0;
 }
 
 
