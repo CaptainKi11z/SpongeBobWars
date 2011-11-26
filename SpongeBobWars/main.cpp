@@ -283,9 +283,9 @@ void ReshapeFunc(int w, int h)
 	Model::getSelf()->width = w;
 }
 
-void initGL(int argc, const char * argv[])
+void initGL(int argc, char * argv[])
 {
-    glutInit(&argc , argv);
+    glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
 	glutInitWindowPosition(0 , 0);
 	glutInitWindowSize(Model::getSelf()->width,Model::getSelf()->height);
@@ -330,7 +330,7 @@ void initGL(int argc, const char * argv[])
 
 
 
-int main (int argc, const char * argv[])
+int main (int argc, char * argv[])
 {
     initGame(numPlayers, numNodes);
     initGL(argc, argv);

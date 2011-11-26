@@ -17,6 +17,7 @@
 		4A0ACE0D147D7128007D3F9E /* Fleet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ACE0B147D7128007D3F9E /* Fleet.cpp */; };
 		4A83041114805A0800DDBA39 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A83040F14805A0800DDBA39 /* OpenGL.framework */; };
 		4A83041214805A0800DDBA39 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A83041014805A0800DDBA39 /* GLUT.framework */; };
+		4A830416148073D300DDBA39 /* DrawableGeometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A830415148073D300DDBA39 /* DrawableGeometry.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +51,8 @@
 		4A0ACE0C147D7128007D3F9E /* Fleet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fleet.h; sourceTree = "<group>"; };
 		4A83040F14805A0800DDBA39 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenGL.framework; sourceTree = "<group>"; };
 		4A83041014805A0800DDBA39 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GLUT.framework; sourceTree = "<group>"; };
+		4A830414148073D300DDBA39 /* DrawableGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawableGeometry.h; sourceTree = "<group>"; };
+		4A830415148073D300DDBA39 /* DrawableGeometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DrawableGeometry.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				4A0ACDC0147D6261007D3F9E /* main.cpp */,
+				4A830414148073D300DDBA39 /* DrawableGeometry.h */,
+				4A830415148073D300DDBA39 /* DrawableGeometry.cpp */,
 				4A0ACDCC147D628F007D3F9E /* Model.h */,
 				4A0ACDCB147D628F007D3F9E /* Model.cpp */,
 				4A0ACDC9147D627D007D3F9E /* Player.h */,
@@ -163,6 +168,7 @@
 				4A0ACE07147D7061007D3F9E /* Ship.cpp in Sources */,
 				4A0ACE0A147D709D007D3F9E /* Flagship.cpp in Sources */,
 				4A0ACE0D147D7128007D3F9E /* Fleet.cpp in Sources */,
+				4A830416148073D300DDBA39 /* DrawableGeometry.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,6 +6,7 @@
 //  Copyright 2011 UW Madison. All rights reserved.
 //
 
+#include <math.h>
 #include "Node.h"
 #include "Model.h"
 
@@ -17,6 +18,9 @@ void Node::initStuff()
     this->numNeighborNodes = 0;
     row = NULL_LOCATION;
     column = NULL_LOCATION;
+    layer = 0;
+    
+    if(!Node::compiled) Node::compileDL();
 }
 
 Node::Node()
@@ -70,4 +74,37 @@ void Node::assignNeighbors(Node *top, Node *topRight, Node *bottomRight, Node *b
 void Node::tick()
 {
     
+}
+
+
+//DRAWABLE GEO FUNCTIONS
+bool Node::compiled = false;
+GLuint Node::displayList;
+
+void Node::compileDL()
+{
+    //Sample compilation of a simple sphere 
+    if(compiled) return;
+    displayList = glGenLists(1);
+    glNewList(displayList, GL_COMPILE);
+    double sqrtOfThreeOverTwo = sqrt(3)/2;
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex3d(1, layer, 0);
+    glVertex3d(1/2, layer, sqrtOfThreeOverTwo);
+    glVertex3d(-1/2, layer, sqrtOfThreeOverTwo);
+    glVertex3d(-1, layer, 0);
+    glVertex3d(-1/2, layer, -1*sqrtOfThreeOverTwo);
+    glVertex3d(1/2, layer, -1*sqrtOfThreeOverTwo);    
+    glEnd();
+    gluSphere(gluNewQuadric(),50,50,50);
+    glEndList();
+    compiled = true;
+}
+
+void Node::draw()
+{
+    if(!Node::compiled) return;
+    setColor(1.0, 0.0, 0.0, 0.0, 0.5, 1.0, 1.0);
+    setGLColor();
+    glCallList(Node::displayList);
 }

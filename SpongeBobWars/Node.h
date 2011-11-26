@@ -8,7 +8,9 @@
 #ifndef H_NODE
 #define H_NODE
 
-class Node
+#include "DrawableGeometry.h"
+
+class Node: public DrawableGeometry
 {
 public:
     //Water, Earth, Wind, Fire
@@ -37,6 +39,12 @@ public:
     void assignNeighbors(Node *top, Node *topRight, Node *bottomRight, Node *bottom, Node *bottomLeft, Node *topLeft);
     
     void tick(); //Do whatever needs to be done on the passing of a turn
+    
+    //Drawable Geometry Stuff
+    static bool compiled;       //True iff displayList names a valid glDisplayList
+    static GLuint displayList;  //Name of displaylist for object
+    void compileDL();
+    void draw();
 };
 
 #endif
