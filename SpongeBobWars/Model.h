@@ -12,6 +12,11 @@
  * CONSTANTS
  */
 
+//GL CONSTANTS
+#define WIDTH 500
+#define HEIGHT 400
+
+//GAME CONSTANTS
 #define MAP_DENSITY 3 //1(linear) to 6(full mesh)
 #define NULL_LOCATION 99999 //'unattainable' row/column to be used for non-placed nodes
 
@@ -56,6 +61,13 @@ public:
     static Model * selfPtr;
     static Model * getSelf();
     
+    //GL Vars
+    int width;
+    int height;
+    int mouseX;
+    int mouseY;
+    
+    //Game Vars
     Player * nullPlayer;
     Node * nullNode;
     Unit * nullUnit;

@@ -17,6 +17,9 @@ Model::Model()
     if(Model::selfPtr)
         throw (new std::string("DO NOT CALL CONSTRUCTOR DIRECTLY. USE Model::getSelf()"));
     
+    width = WIDTH;
+    height = HEIGHT;
+    
     this->nullNode = NULL;
     this->nullPlayer = NULL;
     this->nullUnit = NULL;

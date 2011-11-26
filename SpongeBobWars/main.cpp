@@ -6,6 +6,8 @@
 //  Copyright 2011 UW Madison. All rights reserved.
 //
 
+#import <OpenGL/OpenGL.h>
+#import <GLUT/GLUT.h>
 #include <iostream.h>
 #include <stdlib.h>
 
@@ -16,6 +18,11 @@ int numNodes = 10;
 
 Player ** playerArray;
 Node ** nodeArray;
+
+
+/*
+ * GAME LOGIC FUNCTIONS
+ */
 
 void linkNodeToNeighbors(Node * node)
 {
@@ -69,7 +76,7 @@ void linkNodeToNeighbors(Node * node)
 void createNodeMap(Node * centerNode, int numNodes)
 {
     //THIS FUNCTION IS IN-COMPLETE:
-    // it gets stuck looking for a source node that is eligible for a neighbor. 
+    // it has potential to get stuck looking for a source node that is eligible for a neighbor. 
     // Needs to be tweaked to allow it to break MAP_DENSITY rule if necessary.
     
     
@@ -207,9 +214,126 @@ void initGame(int numPlayers, int numNodes)
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * GL FUNCTIONS
+ */
+
+//Called when mouse dragged (sets mouseX and mouseY from -1 to 1)
+void PassiveMotionFunc(int x, int y)
+{
+    Model::getSelf()->mouseX = (-2.0*x/Model::getSelf()->width)+1.0;
+	Model::getSelf()->mouseY = (2.0*y/Model::getSelf()->height)-1.0;
+}
+
+void DisplayFunc()
+{
+    //Clear screen
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    //drawMap();
+    
+	//DoubleBuffering
+	glutSwapBuffers();
+}
+
+void IdleFunc()
+{
+    glutPostRedisplay();
+}
+
+void KeyboardFunc(unsigned char key, int x, int y)
+{
+    /*
+     switch(key)
+     {
+     case 'p':
+     paused = !paused;
+     break;
+     }
+     */
+}
+
+void SpecialFunc(int key, int x, int y)
+{
+    /*
+     if(key == GLUT_KEY_F1){
+     mode = (mode + 1)%NUM_MODES;
+     }
+     */
+}
+
+//Called on Window Resize
+void ReshapeFunc(int w, int h)
+{
+	if (h <= 0) 
+		return;
+    Model::getSelf()->height = h;
+	Model::getSelf()->width = w;
+}
+
+void initGL(int argc, const char * argv[])
+{
+    glutInit(&argc , argv);
+    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
+	glutInitWindowPosition(0 , 0);
+	glutInitWindowSize(Model::getSelf()->width,Model::getSelf()->height);
+	glutCreateWindow("Moshball");
+    
+	//One-Time setups
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
+    glEnable(GL_NORMALIZE);
+    glDepthFunc(GL_LEQUAL);
+    glShadeModel(GL_FLAT);
+    
+    //Aim Stationary Light
+    GLfloat pos[4] = {0.0f, 10000.0f, 0.0f, 1.0f};
+    glLightfv(GL_LIGHT0, GL_POSITION, pos);
+	
+    //Callback Functions
+	glutDisplayFunc(DisplayFunc);
+	glutReshapeFunc(ReshapeFunc);
+	glutIdleFunc(IdleFunc);
+    glutPassiveMotionFunc(PassiveMotionFunc);
+    glutKeyboardFunc(KeyboardFunc);
+    glutSpecialFunc(SpecialFunc);
+    
+    glutMainLoop();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 int main (int argc, const char * argv[])
 {
     initGame(numPlayers, numNodes);
+    initGL(argc, argv);
     
     std::cout << "Hello, World!\n";
     return 0;

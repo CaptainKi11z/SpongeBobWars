@@ -15,6 +15,8 @@
 		4A0ACE07147D7061007D3F9E /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ACE05147D7061007D3F9E /* Ship.cpp */; };
 		4A0ACE0A147D709D007D3F9E /* Flagship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ACE08147D709D007D3F9E /* Flagship.cpp */; };
 		4A0ACE0D147D7128007D3F9E /* Fleet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0ACE0B147D7128007D3F9E /* Fleet.cpp */; };
+		4A83041114805A0800DDBA39 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A83040F14805A0800DDBA39 /* OpenGL.framework */; };
+		4A83041214805A0800DDBA39 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A83041014805A0800DDBA39 /* GLUT.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +48,8 @@
 		4A0ACE09147D709D007D3F9E /* Flagship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flagship.h; sourceTree = "<group>"; };
 		4A0ACE0B147D7128007D3F9E /* Fleet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fleet.cpp; sourceTree = "<group>"; };
 		4A0ACE0C147D7128007D3F9E /* Fleet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fleet.h; sourceTree = "<group>"; };
+		4A83040F14805A0800DDBA39 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OpenGL.framework; sourceTree = "<group>"; };
+		4A83041014805A0800DDBA39 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GLUT.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A83041114805A0800DDBA39 /* OpenGL.framework in Frameworks */,
+				4A83041214805A0800DDBA39 /* GLUT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +68,8 @@
 		4A0ACDB1147D6261007D3F9E = {
 			isa = PBXGroup;
 			children = (
+				4A83040F14805A0800DDBA39 /* OpenGL.framework */,
+				4A83041014805A0800DDBA39 /* GLUT.framework */,
 				4A0ACDBF147D6261007D3F9E /* SpongeBobWars */,
 				4A0ACDBD147D6261007D3F9E /* Products */,
 			);
@@ -198,6 +206,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -210,6 +222,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
