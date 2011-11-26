@@ -25,18 +25,42 @@ void Node::initStuff()
 
 Node::Node()
 {
+    setType(-1);
     initStuff();
 }
 
 Node::Node(int type)
 {
-    this->type = type;
+    setType(type);
     initStuff();
 }
 
 Node::~Node()
 {
     delete neighborNodes;
+}
+
+void Node::setType(int t)
+{
+    this->type = t;
+    
+    switch (t) {
+        case TYPE_EARTH:
+            this->setColor(0.2, 0.4, 0.1, 1.0, 0.1, 1.0, 0.7);
+            break;
+        case TYPE_WIND:
+            this->setColor(0.6, 0.6, 1.0, 1.0, 0.1, 0.5, 0.7);
+            break;
+        case TYPE_FIRE:
+            this->setColor(1.0, 0.0, 0.0, 1.0, 0.1, 0.5, 0.7);
+            break;
+        case TYPE_WATER:
+            this->setColor(0.0, 0.0, 1.0, 1.0, 0.1, 0.5, 0.7);
+            break;
+        default:
+            this->setColor(0.3, 0.3, 0.3, 1.0, 0.1, 0.5, 0.7);
+            break;
+    }
 }
 
 int Node::getRandomFreeNeighbor()
@@ -87,14 +111,33 @@ void Node::compileDL()
     if(compiled) return;
     displayList = glGenLists(1);
     glNewList(displayList, GL_COMPILE);
-    double sqrtOfThreeOverTwo = sqrt(3)/2;
-    glBegin(GL_TRIANGLE_FAN);
+    double sqrtOfThreeOverTwo = sqrt(3/2);
+    glBegin(GL_TRIANGLES);
+    
+    glVertex3d(0, 0, 0);
     glVertex3d(1, layer, 0);
-    glVertex3d(1/2, layer, sqrtOfThreeOverTwo);
-    glVertex3d(-1/2, layer, sqrtOfThreeOverTwo);
+    glVertex3d(0.5, layer, sqrtOfThreeOverTwo);
+
+    glVertex3d(0, 0, 0);
+    glVertex3d(0.5, layer, sqrtOfThreeOverTwo);
+    glVertex3d(-0.5, layer, sqrtOfThreeOverTwo);
+    
+    glVertex3d(0, 0, 0);
+    glVertex3d(-0.5, layer, sqrtOfThreeOverTwo);
     glVertex3d(-1, layer, 0);
-    glVertex3d(-1/2, layer, -1*sqrtOfThreeOverTwo);
-    glVertex3d(1/2, layer, -1*sqrtOfThreeOverTwo);    
+    
+    glVertex3d(0, 0, 0);
+    glVertex3d(-1, layer, 0);
+    glVertex3d(-0.5, layer, -1*sqrtOfThreeOverTwo);
+    
+    glVertex3d(0, 0, 0);
+    glVertex3d(-0.5, layer, -1*sqrtOfThreeOverTwo);
+    glVertex3d(0.5, layer, -1*sqrtOfThreeOverTwo);  
+    
+    glVertex3d(0, 0, 0);
+    glVertex3d(0.5, layer, -1*sqrtOfThreeOverTwo);  
+    glVertex3d(1, layer, 0);
+    
     glEnd();
     glEndList();
     compiled = true;
@@ -103,7 +146,6 @@ void Node::compileDL()
 void Node::draw()
 {
     if(!Node::compiled) return;
-    setColor(1.0, 0.0, 0.0, 0.0, 0.5, 1.0, 1.0);
     setGLColor();
     glCallList(Node::displayList);
 }

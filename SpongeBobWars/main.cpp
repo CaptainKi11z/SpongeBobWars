@@ -14,7 +14,7 @@
 #include "Model.h"
 
 int numPlayers = 5;
-int numNodes = 10;
+int numNodes = 30;
 
 Player ** playerArray;
 Node ** nodeArray;
@@ -75,12 +75,7 @@ void linkNodeToNeighbors(Node * node)
 
 void createNodeMap(Node * centerNode, int numNodes)
 {
-    //THIS FUNCTION IS IN-COMPLETE:
-    // it has potential to get stuck looking for a source node that is eligible for a neighbor. 
-    // Needs to be tweaked to allow it to break MAP_DENSITY rule if necessary.
-    
-    
-    //NOTE: Two important nodes in this algorithm- sourceNode and newNeighbor. 
+    //  Two important nodes in this algorithm- sourceNode and newNeighbor. 
     //  sourceNode is the node currently looking to add a neighbor (and should already be assigned a location). 
     //  newNeighbor is the node that is looking to be placed, and will be placed next to sourceNode.
     Node* sourceNode;
@@ -88,6 +83,8 @@ void createNodeMap(Node * centerNode, int numNodes)
     int nodesLeftToBeAssigned = numNodes;
     int rNode;
     int rNeighbor;
+    int numAssignAttempts;
+    bool sourceEligible;
     
     //Holds all nodes yet to be assigned. Node gets removed as it is assigned a location
     //Starts with all nodes but 'centerNode', as it is by definition already assigned
@@ -113,10 +110,17 @@ void createNodeMap(Node * centerNode, int numNodes)
         nodeAssigned = false;
         
         //Algorithm ensures node is assigned
+        numAssignAttempts = 0;
         while(!nodeAssigned)
         {
+            //If already tried more than 5 times, ignore the MAP_DENSITY rule
+            if(numAssignAttempts < MAP_DENSITY_STRICTNESS)
+                sourceEligible = sourceNode->numNeighborNodes < MAP_DENSITY && ((rNeighbor = sourceNode->getRandomFreeNeighbor()) != -1);
+            else
+                sourceEligible = (rNeighbor = sourceNode->getRandomFreeNeighbor()) != -1;
+            
             //If the current source node is eligible to have a neighbor
-            if(sourceNode->numNeighborNodes < MAP_DENSITY && ((rNeighbor = sourceNode->getRandomFreeNeighbor()) != -1))
+            if(sourceEligible)
             {
                 //Assign the new node a location coordinate
                 switch (rNeighbor) {
@@ -169,6 +173,7 @@ void createNodeMap(Node * centerNode, int numNodes)
             else
             {
                 sourceNode = sourceNode->neighborNodes[sourceNode->getRandomNeighbor()];
+                numAssignAttempts++;
             }
         }
     }
@@ -201,12 +206,12 @@ void initGame(int numPlayers, int numNodes)
     
     //Create 'center' node (used in generating map
     Node * centerNode;
-    centerNode = nodeArray[numPlayers] = new Node((int)Model::random()*NUM_TYPES);
+    centerNode = nodeArray[numPlayers] = new Node((int)(Model::random()*NUM_TYPES));
     
     //Create neutral nodes
     for(int i = numPlayers+1; i < numNodes; i++)
     {
-        nodeArray[i] = new Node((int)Model::random()*NUM_TYPES);
+        nodeArray[i] = new Node((int)(Model::random()*NUM_TYPES));
     }
     
     //Create map out of Nodes
@@ -230,6 +235,38 @@ void initGame(int numPlayers, int numNodes)
  * GL FUNCTIONS
  */
 
+//DRAWING FUNCTIONS
+
+void drawMap()
+{
+    glEnable(GL_LIGHTING);
+    
+    //Main Viewport
+    glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(60.0 , ((double) Model::getSelf()->width) / ((double) Model::getSelf()->height), 1.0f , 100.0);
+	glViewport(0 , 0 , Model::getSelf()->width, Model::getSelf()->height);
+    
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+    gluLookAt(Model::getSelf()->mouseX*10, 20, Model::getSelf()->mouseY*-10, 0, 0, 0, 0, 0, -1); 
+    
+    for(int i = 0; i < Model::getSelf()->numNodes; i++)
+    {
+        glPushMatrix();
+        glTranslated(nodeArray[i]->column*2, 0, nodeArray[i]->row*1.2);
+        nodeArray[i]->draw();
+        glPopMatrix();
+    }
+    
+}
+
+
+
+
+
+//CALLBACK FUNCTIONS
+
 //Called when mouse dragged (sets mouseX and mouseY from -1 to 1)
 void PassiveMotionFunc(int x, int y)
 {
@@ -242,7 +279,7 @@ void DisplayFunc()
     //Clear screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    //drawMap();
+    drawMap();
     
 	//DoubleBuffering
 	glutSwapBuffers();
@@ -294,14 +331,18 @@ void initGL(int argc, char * argv[])
 	//One-Time setups
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHT0);
-    glEnable(GL_LIGHT1);
+    glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_NORMALIZE);
     glDepthFunc(GL_LEQUAL);
     glShadeModel(GL_FLAT);
     
     //Aim Stationary Light
-    GLfloat pos[4] = {0.0f, 10.0f, 0.0f, 1.0f};
+    GLfloat pos[4] = {5.0f, 5.0f, 5.0f, 1.0f};
     glLightfv(GL_LIGHT0, GL_POSITION, pos);
+    GLfloat full[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, full);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, full);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, full);
 	
     //Callback Functions
 	glutDisplayFunc(DisplayFunc);
@@ -310,8 +351,6 @@ void initGL(int argc, char * argv[])
     glutPassiveMotionFunc(PassiveMotionFunc);
     glutKeyboardFunc(KeyboardFunc);
     glutSpecialFunc(SpecialFunc);
-    
-    glutMainLoop();
 }
 
 
@@ -332,9 +371,10 @@ void initGL(int argc, char * argv[])
 
 int main (int argc, char * argv[])
 {
-    initGame(numPlayers, numNodes);
     initGL(argc, argv);
-    
+    initGame(numPlayers, numNodes);
+    glutMainLoop();
+
     std::cout << "Hello, World!\n";
     return 0;
 }

@@ -15,6 +15,7 @@ class Node: public DrawableGeometry
 public:
     //Water, Earth, Wind, Fire
     int type;
+    void setType(int t);
     
     //Used for information in linking/positioning
     int row;

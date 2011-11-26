@@ -18,6 +18,7 @@
 
 //GAME CONSTANTS
 #define MAP_DENSITY 3 //1(linear) to 6(full mesh)
+#define MAP_DENSITY_STRICTNESS 1000000 //Number of attempts worth spending to try and fit density rule
 #define NULL_LOCATION 99999 //'unattainable' row/column to be used for non-placed nodes
 
 //Node/Unit Types
@@ -64,8 +65,8 @@ public:
     //GL Vars
     int width;
     int height;
-    int mouseX;
-    int mouseY;
+    double mouseX;
+    double mouseY;
     
     //Game Vars
     Player * nullPlayer;
