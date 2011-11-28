@@ -16,7 +16,7 @@
 #include "Model.h"
 
 int numPlayers = 5;
-int numNodes = 500;
+int numNodes = 100;
 
 Player ** playerArray;
 Node ** nodeArray;
@@ -180,7 +180,7 @@ void createNodeMap(Node * centerNode, int numNodes)
                     rowMax = newNeighbor->row;
                 if(newNeighbor->column < colMin)
                     colMin = newNeighbor->column;
-                if(newNeighbor->row > colMax)
+                if(newNeighbor->column > colMax)
                     colMax = newNeighbor->column;
                 
                 nodeAssigned = true;
