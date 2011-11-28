@@ -107,40 +107,41 @@ GLuint Node::displayList;
 
 void Node::compileDL()
 {
-    //Sample compilation of a simple sphere 
-    if(compiled) return;
-    displayList = glGenLists(1);
-    glNewList(displayList, GL_COMPILE);
+    if(Node::compiled) return;
+    Node::displayList = glGenLists(1);
     double sqrtOfThreeOverTwo = sqrt(3/2);
+
+    glNewList(Node::displayList, GL_COMPILE);
+    
     glBegin(GL_TRIANGLES);
     
     glVertex3d(0, 0, 0);
-    glVertex3d(1, layer, 0);
-    glVertex3d(0.5, layer, sqrtOfThreeOverTwo);
+    glVertex3d(1, layer/5, 0);
+    glVertex3d(0.5, layer/5, sqrtOfThreeOverTwo);
 
     glVertex3d(0, 0, 0);
-    glVertex3d(0.5, layer, sqrtOfThreeOverTwo);
-    glVertex3d(-0.5, layer, sqrtOfThreeOverTwo);
+    glVertex3d(0.5, layer/5, sqrtOfThreeOverTwo);
+    glVertex3d(-0.5, layer/5, sqrtOfThreeOverTwo);
     
     glVertex3d(0, 0, 0);
-    glVertex3d(-0.5, layer, sqrtOfThreeOverTwo);
-    glVertex3d(-1, layer, 0);
+    glVertex3d(-0.5, layer/5, sqrtOfThreeOverTwo);
+    glVertex3d(-1, layer/5, 0);
     
     glVertex3d(0, 0, 0);
-    glVertex3d(-1, layer, 0);
-    glVertex3d(-0.5, layer, -1*sqrtOfThreeOverTwo);
+    glVertex3d(-1, layer/5, 0);
+    glVertex3d(-0.5, layer/5, -1*sqrtOfThreeOverTwo);
     
     glVertex3d(0, 0, 0);
-    glVertex3d(-0.5, layer, -1*sqrtOfThreeOverTwo);
-    glVertex3d(0.5, layer, -1*sqrtOfThreeOverTwo);  
+    glVertex3d(-0.5, layer/5, -1*sqrtOfThreeOverTwo);
+    glVertex3d(0.5, layer/5, -1*sqrtOfThreeOverTwo);  
     
     glVertex3d(0, 0, 0);
-    glVertex3d(0.5, layer, -1*sqrtOfThreeOverTwo);  
-    glVertex3d(1, layer, 0);
+    glVertex3d(0.5, layer/5, -1*sqrtOfThreeOverTwo);  
+    glVertex3d(1, layer/5, 0);
     
     glEnd();
     glEndList();
-    compiled = true;
+    Node::compiled = true;
 }
 
 void Node::draw()

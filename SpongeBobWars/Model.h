@@ -17,7 +17,7 @@
 #define HEIGHT 400
 
 //GAME CONSTANTS
-#define MAP_DENSITY 6 //1(linear) to 6(full mesh)
+#define MAP_DENSITY 3 //1(linear) to 6(full mesh)
 #define MAP_DENSITY_STRICTNESS 1000000 //Number of attempts worth spending to try and fit density rule
 #define NULL_LOCATION 99999 //'unattainable' row/column to be used for non-placed nodes
 
@@ -43,6 +43,7 @@
 //Forward declarations- everything has access to everything (woah)
 class Player;
 class Node;
+class Selector;
 class Unit;
 class Ship;
 class Flagship;
@@ -50,6 +51,7 @@ class Fleet;
 
 #include "Player.h"
 #include "Node.h"
+#include "Selector.h"
 #include "Unit.h"
 #include "Ship.h"
 #include "Flagship.h"
@@ -75,6 +77,7 @@ public:
     
     Player ** playerArray;
     Node ** nodeArray;
+    Selector * selector;
     
     int numPlayers;
     int numNodes;
@@ -89,6 +92,7 @@ public:
     
     void setNumPlayers(int numPlayers);
     void setNumNodes(int numNodes);
+    Selector * setSelector();
     
     Model();
     ~Model();

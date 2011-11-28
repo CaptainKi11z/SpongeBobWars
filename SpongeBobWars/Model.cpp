@@ -24,7 +24,7 @@ Model::Model()
     this->nullNode = NULL;
     this->nullPlayer = NULL;
     this->nullUnit = NULL;
-    
+        
     this->rowMax = 0;
     this->rowMin = 0;
     this->colMax = 0;
@@ -45,6 +45,7 @@ Model::~Model()
 {
     delete playerArray;
     delete nodeArray;
+    delete selector;
     delete selfPtr;
 }
 
@@ -58,6 +59,12 @@ void Model::setNumNodes(int numNodes)
 {
     Model::getSelf()->numNodes = numNodes;
     Model::getSelf()->nodeArray = new Node*[numNodes];
+}
+
+Selector * Model::setSelector()
+{
+    this->selector = new Selector();
+    return this->selector;
 }
 
 void Model::setCameraParams()

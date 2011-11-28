@@ -16,10 +16,11 @@
 #include "Model.h"
 
 int numPlayers = 5;
-int numNodes = 100;
+int numNodes = 20;
 
 Player ** playerArray;
 Node ** nodeArray;
+Selector * selector;
 
 
 /*
@@ -105,13 +106,14 @@ void createNodeMap(Node * centerNode, int numNodes)
     
     centerNode->row = 0;
     centerNode->column = 0;
-    sourceNode = centerNode;
+    //sourceNode = centerNode;
 
     bool nodeAssigned = false;
     //Assign each node a location
     while(nodesLeftToBeAssigned > 0)
     {
         //Pick a random node from copyArray
+        sourceNode = centerNode;
         rNode = (int)(Model::random()*nodesLeftToBeAssigned);
         newNeighbor = copyArray[rNode];
         nodeAssigned = false;
@@ -216,6 +218,8 @@ void initGame(int numPlayers, int numNodes)
     //**BE CAREFUL- DO NOT ABUSE THIS**
     playerArray = Model::getSelf()->playerArray;
     nodeArray = Model::getSelf()->nodeArray;
+    //Set Selector (called here instead of in constructor to allow for GL to be allocated first)
+    selector = Model::getSelf()->setSelector();
 
     //Create players and assign each a node
     for(int i = 0; i < numPlayers; i++)
@@ -258,19 +262,24 @@ void initGame(int numPlayers, int numNodes)
 
 //DRAWING FUNCTIONS
 
+void drawSelector()
+{
+    int tCol = (int)-5*Model::getSelf()->mouseX;
+    int tRow = (int)5*Model::getSelf()->mouseY;
+    if((tCol + tRow)%2 == 0)
+    {
+        selector->column = tCol;
+        selector->row = tRow;
+    }
+    glPushMatrix();
+    glTranslated(selector->column*2, 0, selector->row*1.2);
+    selector->draw();
+    glPopMatrix();
+}
+
 void drawMap()
 {
-    glEnable(GL_LIGHTING);
-    
-    //Main Viewport
-    glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(60.0 , ((double) Model::getSelf()->width) / ((double) Model::getSelf()->height), 1.0f , 100.0);
-	glViewport(0 , 0 , Model::getSelf()->width, Model::getSelf()->height);
-    
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-    gluLookAt(Model::getSelf()->camCenterX+Model::getSelf()->mouseX*10, Model::getSelf()->zoom, Model::getSelf()->camCenterY+Model::getSelf()->mouseY*-10, Model::getSelf()->camCenterX, 0, Model::getSelf()->camCenterY, 0, 0, -1); 
+	
     
     for(int i = 0; i < Model::getSelf()->numNodes; i++)
     {
@@ -281,6 +290,8 @@ void drawMap()
     }
     
 }
+
+
 
 
 
@@ -299,8 +310,19 @@ void DisplayFunc()
 {
     //Clear screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    //Main Viewport
+    glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(60.0 , ((double) Model::getSelf()->width) / ((double) Model::getSelf()->height), 1.0f , 100.0);
+	glViewport(0 , 0 , Model::getSelf()->width, Model::getSelf()->height);
+    
+    glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+    gluLookAt(Model::getSelf()->camCenterX+Model::getSelf()->mouseX*10, Model::getSelf()->zoom, Model::getSelf()->camCenterY+Model::getSelf()->mouseY*-10, Model::getSelf()->camCenterX, 0, Model::getSelf()->camCenterY, 0, 0, -1); 
     
     drawMap();
+    drawSelector();
     
 	//DoubleBuffering
 	glutSwapBuffers();
@@ -347,10 +369,11 @@ void initGL(int argc, char * argv[])
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
 	glutInitWindowPosition(0 , 0);
 	glutInitWindowSize(Model::getSelf()->width,Model::getSelf()->height);
-	glutCreateWindow("Moshball");
+	glutCreateWindow("Whatever");
     
 	//One-Time setups
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_NORMALIZE);
